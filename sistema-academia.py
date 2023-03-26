@@ -25,6 +25,7 @@ def inserir_alunos(nome_aluno, cpf, altura, peso, imc, resultado):
         'imc' : imc,
         'resultado' : resultado
     })
+    print(f'Aluno {nome_aluno} cadastrado com sucesso!')
 
 
 def buscar_aluno(cpf):
@@ -36,9 +37,7 @@ def buscar_aluno(cpf):
                   f"{aluno['peso']}----"
                   f"{aluno['imc']}----"
                   f"{aluno['resultado']}")
-        else:
-            print('Aluno não encontrado')
-        break
+
 
 def excluir_aluno(cpf):
     for aluno in alunos:
@@ -80,10 +79,11 @@ def imprimir_menu():
     print(f'-----------------------------------------'
           f'\n1 - Mostrar todos os alunos'
           f'\n2 - Buscar Aluno'
-          f'\n3 - Incluir Aluno'
+          f'\n3 - Cadastrar Aluno'
           f'\n4 - Excluir Aluno'
           f'\n5 - Atualizar IMC'
           f'\n6 - Aluno com maior IMC'
+          f'\n0 - Finalizar'
           f'\n-----------------------------------------')
 
 
@@ -97,11 +97,10 @@ while True:
         buscar_aluno(cpf)
     elif opcao == 3:
         nome_aluno = input('Digite o nome do aluno: ')
-        cpf = input('Digite o CPF do aluno sem pontuação: ')
+        cpf = input('Digite o CPF do aluno (apenas numeros): ')
         altura = float(input('Digite a altura do aluno em Metros: '))
         peso = float(input('Digite o peso do aluno em Quilogramas(Kg): '))
-        imc = peso / (altura * altura)
-        inserir_alunos(nome_aluno, cpf, altura, peso, imc, '')
+        inserir_alunos(nome_aluno, cpf, altura, peso, '', '')
         atualizar_imc()
     elif opcao == 4:
         cpf = input('Digite o CPF do aluno: ')
