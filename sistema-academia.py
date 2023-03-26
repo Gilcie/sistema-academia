@@ -1,13 +1,16 @@
-alunos = [{'nome': 'João Felix', 'cpf': '02323249103', 'altura': 1.70, 'peso': 75, 'imc': '', 'resultado': 'Indisponível'},
-          {'nome': 'João Junior', 'cpf': '0232323403', 'altura': 1.60, 'peso': 70, 'imc': '', 'resultado': 'Indisponível'},
+alunos = [
+    {'nome': 'João Felix', 'cpf': '02323249103', 'altura': 1.70, 'peso': 75, 'imc': '', 'resultado': 'Indisponível'},
+    {'nome': 'João Junior', 'cpf': '0232323403', 'altura': 1.60, 'peso': 70, 'imc': '', 'resultado': 'Indisponível'},
 
-          ]
+    ]
 
-#------- Métodos do sistema ------------
+
+# ------- Métodos do sistema ------------
 
 
 def imprimir_alunos():
     for aluno in alunos:
+        atualizar_imc()
         print(f"{aluno['nome']}---------"
               f"{aluno['cpf']}-----"
               f"{aluno['altura']}----"
@@ -17,15 +20,15 @@ def imprimir_alunos():
 
 
 def inserir_alunos(nome_aluno, cpf, altura, peso, imc, resultado):
-    alunos.append({
-        'nome' : nome_aluno,
-        'cpf' : cpf,
-        'altura' : altura,
-        'peso' : peso,
-        'imc' : imc,
-        'resultado' : resultado
-    })
-    print(f'Aluno {nome_aluno} cadastrado com sucesso!')
+        alunos.append({
+            'nome': nome_aluno,
+            'cpf': cpf,
+            'altura': altura,
+            'peso': peso,
+            'imc': imc,
+            'resultado': resultado
+        })
+        print(f'Aluno {nome_aluno} cadastrado com sucesso!')
 
 
 def buscar_aluno(cpf):
@@ -37,13 +40,19 @@ def buscar_aluno(cpf):
                   f"{aluno['peso']}----"
                   f"{aluno['imc']}----"
                   f"{aluno['resultado']}")
+        print(f'\n>>>>>Aluno não encontrado')
+        break
+
 
 
 def excluir_aluno(cpf):
-    for aluno in alunos:
-        if aluno['cpf'] == cpf:
-            alunos.remove(aluno)
-            print(f'Aluno {aluno["nome"]} removido com sucesso!')
+        for aluno in alunos:
+            if aluno['cpf'] == cpf:
+                alunos.remove(aluno)
+                print(f'Aluno {aluno["nome"]} removido com sucesso!')
+            print(f'\n>>>>>Aluno não encontrado')
+            break
+
 
 
 def atualizar_imc():
@@ -73,20 +82,19 @@ def aluno_maior_imc():
     print(f'Olá {nome_aluno}, Seu IMC é {maior_imc}. Isso significa que você está com {aluno["resultado"]} ')
 
 
-
-
 def imprimir_menu():
     print(f'-----------------------------------------'
           f'\n1 - Mostrar todos os alunos'
           f'\n2 - Buscar Aluno'
           f'\n3 - Cadastrar Aluno'
           f'\n4 - Excluir Aluno'
-          f'\n5 - Atualizar IMC'
-          f'\n6 - Aluno com maior IMC'
+          f'\n5 - Aluno com maior IMC'
           f'\n0 - Finalizar'
           f'\n-----------------------------------------')
 
 
+# ------- Execução do sistema ------------
+atualizar_imc()
 while True:
     imprimir_menu()
     opcao = int(input('Digite uma opção: '))
@@ -106,12 +114,8 @@ while True:
         cpf = input('Digite o CPF do aluno: ')
         excluir_aluno(cpf)
     elif opcao == 5:
-        atualizar_imc()
-        print('IMC atualizado com sucesso!')
-    elif opcao == 6:
         aluno_maior_imc()
     elif opcao == 0:
         break
     else:
         print('Opção inválida!')
-
